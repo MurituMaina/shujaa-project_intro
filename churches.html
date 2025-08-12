@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Church Sponsors – Shujaa Scholarship Programme</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="./assets/school logo.png" type="image/x-icon">
+</head>
+<body class="bg-light">
+  <div class="container my-4">
+    <div class="d-flex align-items-center mb-4">
+      <img src="assets/school logo.png" alt="New Hope Logo" height="60" class="me-3">
+      <div>
+        <h3>Church Sponsorship Overview</h3>
+        <small class="text-muted">Shujaa Scholarship Programme – New Hope Initiative</small>
+      </div>
+    </div>
+<!-- Pages -->
+    <div class="d-flex justify-content-around my-4 mx-2">
+       <a href="index.html" class="btn btn-outline-success">Dashboard</a>
+      <a href="churches.html" class="btn btn-outline-success">View Churches</a>
+      <a href="sponsored.html" class="btn btn-outline-success">Sponsored Students</a>
+      <a href="students.html" class="btn btn-outline-success">All Students</a>
+    </div>
+
+</div>
+    <div id="churchesGrid"></div>
+
+    <a href="index.html" id="backtoDashboard"class="btn btn-outline-secondary mt-4">← Back to Dashboard</a>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="js/load_data.js"></script>
+  <script>
+    const container = document.getElementById("churchesGrid");
+
+    function groupByChurch(data) {
+      const grouped = {};
+      data.forEach(s => {
+        // Adjust property names to match your Excel columns
+        if (s["Sponsor"] && s["Church"]) {
+          if (!grouped[s["Church"]]) {
+            grouped[s["Church"]] = [];
+          }
+          grouped[s["Church"]].push(s);
+        }
+      });
+      return grouped;
+    }
+
+    function displayChurches(churchData) {
+      container.innerHTML = "";
+
+      const sortedChurches = Object.keys(churchData).sort();
+      sortedChurches.forEach(church => {
+    if (!church || church.trim().toLowerCase() === "none") return; // Skip "None" or empty
+
+
+      // sortedChurches.forEach(church => {
+        const students = churchData[church];
+        const card = document.createElement("div");
+        card.className = "card mb-4 shadow-sm";
+
+        card.innerHTML = `
+          <div class="card-header bg-success text-white fw-bold">
+            ${church} – ${students.length} Sponsored ${students.length > 1 ? 'Students' : 'Student'}
+          </div>
+          <div class="card-body p-0">
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Grade</th>
+                  <th>Sponsor</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${students.map(s => `
+                  <tr>
+                    <td>${s["Name"]}</td>
+                    <td>${s["Grade"]}</td>
+                    <td>${s["Sponsor"]}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      if (sortedChurches.length === 0) {
+        container.innerHTML = `<p class="text-muted">No church sponsorship data available.</p>`;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadStudentData(students => {
+        const grouped = groupByChurch(students);
+        displayChurches(grouped);
+      });
+    });
+</script>
+  <footer class="mt-5">
+    <div class="container">
+      <div class="footer-links mb-2">
+        <a href="https://acaciatreelodgekenya.com/" target="_blank" rel="noopener">Acacia Tree Lodge</a>
+        <a href="https://newhopeinitiative.org/projects/kenya" target="_blank" rel="noopener">New Hope Initiative</a>
+      </div>
+      <div>
+        <strong>More Information:</strong> For partnership, sponsorship, or general inquiries, please contact us via the <a href="https://newhopeinitiative.org/contact/" target="_blank" rel="noopener">New Hope Initiative Contact Page</a>.<br>
+        &copy; <span id="year"></span> Shujaa Scholarship Programme. All rights reserved.
+      </div>
+    </div>
+    <script>
+      // Set current year in footer
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shujaa Scholarship Programme</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="icon" href="./assets/school logo.png" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body class="bg-light">
+  <div class="container my-4">
+    <div class="d-flex align-items-center mb-4">
+      <img src="assets/school logo.png" alt="New Hope Initiative Logo" height="70" class="me-3">
+      <div>
+        <h2 class="mb-0">Shujaa Scholarship Programme</h2>
+        <small class="text-muted">New Hope Initiative – Kibera School</small>
+      </div>
+    </div>
+    <!-- Pages -->
+    <div class="d-flex justify-content-around my-4 mx-2">
+      <a href="index.html" class="btn btn-outline-success">Dashboard</a>
+      <a href="churches.html" class="btn btn-outline-success">View Churches</a>
+      <a href="sponsored.html" class="btn btn-outline-success">Sponsored Students</a>
+      <a href="students.html" class="btn btn-outline-success">All Students</a>
+    </div>
+
+    <!-- System Purpose and Chart Review -->
+    <div class="mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">About the Shujaa Scholarship Management System</h5>
+          <p>
+            This system is designed to help <strong>New Hope Initiative</strong> efficiently manage and visualize student sponsorship data for the Shujaa Scholarship Programme. 
+            It provides real-time insights into the number of sponsored and unsponsored students, as well as the distribution of sponsorships across different churches.
+          </p>
+          <p>
+            <strong>Pie Chart:</strong> The pie chart below shows the percentage of students who are currently sponsored versus those who are not. This gives a quick overview of the programme's sponsorship coverage.<br>
+            <strong>Bar Graph:</strong> The bar graph displays the number of sponsored students per church, ordered from the lowest to the highest. This helps identify which churches are most and least involved in supporting students.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-6 d-flex justify-content-center">
+        <canvas id="sponsorshipPieChart" width="10" height="10"></canvas>
+      </div>
+      <div class="col-md-6 d-flex justify-content-center">
+        <canvas id="churchBarChart" width="10" height="10"></canvas>
+      </div>
+    </div>
+</div>
+  <footer class="mt-5 centered-footer">
+  <div class="container">
+    <div class="footer-links mb-2">
+      <a href="https://acaciatreelodgekenya.com/" target="_blank" rel="noopener">Acacia Tree Lodge</a>
+      <a href="https://newhopeinitiative.org/projects/kenya" target="_blank" rel="noopener">New Hope Initiative</a>
+    </div>
+    <div>
+      <strong>More Information:</strong> For partnership, sponsorship, or general inquiries, please contact us via the <a href="https://newhopeinitiative.org/contact/" target="_blank" rel="noopener">New Hope Initiative Contact Page</a>.<br>
+       Scholarship Programme. All rights reserved.
+       <br/>
+       &copy; <span id="year"></span>
+    </div>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="js/load_data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

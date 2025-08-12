@@ -1,0 +1,132 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
+    color: #212529;
+  }
+  
+  canvas {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  h2 {
+    font-weight: bold;
+    color: #4CAF50;
+  }
+  
+  .btn-success {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+  }
+  
+  .btn-outline-success {
+    color: #4CAF50;
+    border-color: #4CAF50;
+  }
+  
+  .btn-outline-success:hover {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #333333;
+    color: #fff;
+  }
+  
+/* Students */
+#backtoDashboard{
+    margin-top: 20px;
+    margin-left: 2em;
+    display: inline-block;
+    text-decoration: none;
+    color: #824caf;
+    border: 1px solid #4CAF50;
+    padding: 10px 20px;
+    border-radius: 5px;   
+}
+
+/* Churches */
+
+
+.churches-main-container { 
+  width: 50%; 
+  margin: 0 auto; 
+}
+#churchesGrid{
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+/* footer{
+      background-color:#4CAF50;
+      align-content: center;
+      margin-bottom: 0;
+
+}
+
+
+.churches-main-container {
+  width: 75%;
+  margin: 0 auto;
+}
+
+#churchesGrid {
+  display: flex; */
+  /* flex-wrap: wrap;
+  justify-content: center;
+  align-self: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-left: 8rem;
+  margin-right: 8rem;
+}
+
+.church-card {
+  flex: 3 1 320px;
+  max-width: 370px;
+  min-width: 300px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#sponsorshipPieChart, #churchBarChart {
+      max-width: 300px;
+      max-height: 300px;
+      margin: 0 auto;
+      display: block;
+    }
+    footer {
+      background: #f8f9fa;
+      border-top: 1px solid #e0e0e0;
+      padding: 1.5rem 0 0.5rem 0;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+    .footer-links a {
+      margin-right: 1.5rem;
+      color: #198754;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    } */
+    footer {
+  background: #e9f5ee;
+  border-top: 1px solid #e0e0e0;
+  padding: 1.5rem 0 0.5rem 0;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+.footer-links a {
+  margin-right: 1.5rem;
+  color: #198754;
+  text-decoration: none;
+}
+.footer-links a:hover {
+  text-decoration: underline;
+}
