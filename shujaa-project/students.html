@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Students – Shujaa Scholarship Programme</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+ <link rel="icon" href="./assets/school logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body class="bg-light">
+  <div class="container my-4">
+    <div class="d-flex align-items-center mb-4">
+      <img src="assets/school logo.png" alt="New Hope Logo" height="60" class="me-3">
+      <div>
+        <h3>All Students by Class</h3>
+        <small class="text-muted">Shujaa Scholarship Programme – New Hope Initiative</small>
+      </div>
+    </div>
+    <!-- Pages -->
+    <div class="d-flex justify-content-around my-4">
+       <a href="index.html" class="btn btn-outline-success">Dashboard</a>
+      <a href="churches.html" class="btn btn-outline-success">View Churches</a>
+      <a href="sponsored.html" class="btn btn-outline-success">Sponsored Students</a>
+      <a href="students.html" class="btn btn-outline-success">All Students</a>
+    </div>
+
+    <!-- Students Table by Grade -->
+    <div id="gradeContainer"></div>
+
+    <a href="index.html" id="backtoDashboard" class="btn btn-outline-secondary mt-4">← Back to Dashboard</a>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="js/load_data.js"></script>
+  <script>
+    const gradeContainer = document.getElementById("gradeContainer");
+
+    function displayStudentsByGrade(students) {
+      gradeContainer.innerHTML = "";
+
+      const grouped = {};
+      students.forEach(student => {
+        const grade = student.Grade || "Unknown Grade";
+        if (!grouped[grade]) grouped[grade] = [];
+        grouped[grade].push(student);
+      });
+
+      Object.keys(grouped).sort().forEach(grade => {
+        const tableHtml = `
+          <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-success text-white">
+              ${grade} – ${grouped[grade].length} Student(s)
+            </div>
+            <div class="card-body p-0">
+              <table class="table table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Sponsorship</th>
+                    <th>Sponsor</th>
+                    <th>Church</th>
+                    <th>Block</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${grouped[grade].map(s => `
+                    <tr>
+                      <td>${s["Name"] || s["Name"] || "-"}</td>
+                      <td>
+                        ${(s["Sponsor"] && s["Sponsor"].trim() !== "") ?
+                          '<span class="badge bg-success">Sponsored</span>' :
+                          '<span class="badge bg-danger">Not Sponsored</span>'}
+                      </td>
+                      <td>${s["Sponsor"] || "-"}</td>
+                      <td>${s["Church"] || "-"}</td>
+                      <td>${s["Class Group"] || "-"}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `;
+        gradeContainer.innerHTML += tableHtml;
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadStudentData(students => {
+        displayStudentsByGrade(students);
+      });
+    });
+  </script>
+  <!-- <footer class="mt-5">
+    <div class="container">
+      <div class="footer-links mb-2">
+        <a href="https://acaciatreelodgekenya.com/" target="_blank" rel="noopener">Acacia Tree Lodge</a>
+        <a href="https://newhopeinitiative.org/projects/kenya" target="_blank" rel="noopener">New Hope Initiative</a>
+      </div>
+      <div>
+        <strong>More Information:</strong> For partnership, sponsorship, or general inquiries, please contact us via the <a href="https://newhopeinitiative.org/contact/" target="_blank" rel="noopener">New Hope Initiative Contact Page</a>.<br>
+        &copy; <span id="year"></span> Shujaa Scholarship Programme. All rights reserved.
+      </div>
+    </div>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </footer> -->
+<footer class="mt-5 centered-footer">
+  <div class="container">
+    <div class="footer-links mb-2">
+      <a href="https://acaciatreelodgekenya.com/" target="_blank" rel="noopener">Acacia Tree Lodge</a>
+      <a href="https://newhopeinitiative.org/projects/kenya" target="_blank" rel="noopener">New Hope Initiative</a>
+    </div>
+    <div>
+      <strong>More Information:</strong> For partnership, sponsorship, or general inquiries, please contact us via the <a href="https://newhopeinitiative.org/contact/" target="_blank" rel="noopener">New Hope Initiative Contact Page</a>.<br>
+      &copy; <span id="year"></span> Shujaa Scholarship Programme. All rights reserved.
+    </div>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</footer>
+</body>
+</html>
